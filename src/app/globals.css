@@ -13,7 +13,17 @@ body {
   scroll-behavior: smooth;
 }
 
-/* --- 3D UTILITIES --- */
+/* 1. Hapus scrollbar tapi tetap bisa scroll */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 2. Setup 3D untuk Tech Card */
 .perspective-1000 {
   perspective: 1000px;
 }
@@ -27,26 +37,7 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
-/* Hide Scrollbar */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* --- CUSTOM TEXTURES & EFFECTS --- */
-
-/* 1. Dot Pattern untuk Tech Card */
-.bg-grid-pattern {
-  background-image: radial-gradient(#111 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.05;
-}
-
-/* 2. Digital Scanline untuk Foto (Efek Layar) */
+/* 3. Efek Layar Digital (Scanline) */
 .bg-scanline::before {
   content: "";
   position: absolute;
@@ -63,15 +54,9 @@ body {
   mix-blend-mode: overlay;
 }
 
-/* 3. Bloom Transition (Animasi Lambat-Cepat) */
-.transition-bloom {
-  transition-property: all;
-  transition-duration: 1000ms;
-  /* Cubic Bezier: Lambat di awal, 'snappy' di akhir */
-  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.group:hover .transition-bloom,
-.group:active .transition-bloom {
-  transition-duration: 600ms;
+/* 4. Efek Grid Kertas Teknik */
+.bg-grid-pattern {
+  background-image: radial-gradient(#111 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.05;
 }
