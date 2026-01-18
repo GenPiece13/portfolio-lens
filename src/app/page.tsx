@@ -3,6 +3,7 @@ import { Syne, Space_Mono } from "next/font/google";
 import TechCard from "@/components/TechCard";
 import BottomNav from "@/components/BottomNav";
 import { photos, projects } from "@/data/portofolio";
+import GalleryItem from "@/components/GalleryItem";
 
 const syne = Syne({ subsets: ["latin"], variable: "--font-syne", weight: ["400", "700", "800"] });
 const spaceMono = Space_Mono({ subsets: ["latin"], variable: "--font-space", weight: ["400", "700"] });
@@ -67,7 +68,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* --- 03. PHOTOGRAPHY / EMOTION SECTION --- */}
+        {/* --- 03. PHOTOGRAPHY SECTION --- */}
         <section id="art" className="py-24 bg-charcoal text-paper overflow-hidden relative">
           <div className="px-6 mb-12 flex justify-between items-end">
             <div>
@@ -81,33 +82,19 @@ export default function Home() {
           </div>
 
           {/* Horizontal Scroll Snap Container */}
-          <div className="flex gap-6 overflow-x-auto px-6 pb-12 scrollbar-hide snap-x group/gallery pl-[10vw]">
-            {photos.map((photo) => (
-              <div
-                key={photo.id}
-                // REVISI BARU: Menambahkan 'bg-scanline' untuk tekstur digital halus
-                className="relative min-w-[80vw] md:min-w-[500px] aspect-[4/5] md:aspect-[3/4] bg-gray-900 rounded-sm snap-center overflow-hidden border border-white/10 group cursor-grab active:cursor-grabbing bg-scanline"
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover transition-bloom scale-110 grayscale brightness-75 contrast-125 
-             group-hover:grayscale-0 group-hover:brightness-110 group-hover:contrast-100 group-hover:scale-100 
-             group-active:grayscale-0 group-active:brightness-110 group-active:contrast-100 group-active:scale-100"
-                  /* ^^^ Penambahan group-active agar responsif saat ditekan jari */
-                  sizes="(max-width: 768px) 80vw, 500px"
-                />
+          <div className="flex gap-6 overflow-x-auto px-6 pb-12 scrollbar-hide snap-x pl-[10vw]">
 
-                {/* Overlay Caption - Sedikit penyesuaian agar lebih pop-up */}
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out translate-y-4 group-hover:translate-y-0 flex flex-col justify-end p-8 z-20">
-                  <span className="text-digital font-mono text-[10px] mb-2 tracking-widest">Isolasi No. 0{photo.id}</span>
-                  <p className="font-display text-2xl uppercase text-white leading-none tracking-tight">
-                    {photo.caption}
-                  </p>
-                </div>
-              </div>
+            {/* --- BAGIAN INI YANG DIUBAH MENJADI KOMPONEN --- */}
+            {photos.map((photo) => (
+              <GalleryItem
+                key={photo.id}
+                index={photo.id}
+                src={photo.src}
+                alt={photo.alt}
+                caption={photo.caption}
+              />
             ))}
+
             <div className="min-w-[5vw] snap-align-none"></div>
           </div>
         </section>
