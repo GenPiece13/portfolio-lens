@@ -92,14 +92,11 @@ export default function Home() {
                   src={photo.src}
                   alt={photo.alt}
                   fill
-                  // REVISI BARU: Interaksi "Digital Bloom"
-                  // 1. transition-bloom: Menggunakan timing custom kita.
-                  // 2. filter awal: grayscale(100%) brightness(0.8) contrast(1.2) -> Gelap, kontras tinggi, hitam putih (seperti layar mati).
-                  // 3. hover filter: grayscale(0) brightness(1.1) contrast(1) -> Warna meledak, sedikit lebih terang dari aslinya (bloom effect).
-                  // 4. scale: scale-110 ke scale-100 (zoom out perlahan saat fokus).
-                  className="object-cover transition-bloom scale-110 grayscale brightness-75 contrast-125 group-hover:grayscale-0 group-hover:brightness-110 group-hover:contrast-100 group-hover:scale-100"
+                  className="object-cover transition-bloom scale-110 grayscale brightness-75 contrast-125 
+             group-hover:grayscale-0 group-hover:brightness-110 group-hover:contrast-100 group-hover:scale-100 
+             group-active:grayscale-0 group-active:brightness-110 group-active:contrast-100 group-active:scale-100"
+                  /* ^^^ Penambahan group-active agar responsif saat ditekan jari */
                   sizes="(max-width: 768px) 80vw, 500px"
-                  priority={photo.id === 1}
                 />
 
                 {/* Overlay Caption - Sedikit penyesuaian agar lebih pop-up */}

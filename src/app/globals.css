@@ -1,33 +1,19 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #F2F2F0;
-  /* Off-white */
   --foreground: #111111;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  /* Menambahkan smooth scroll untuk navigasi anchor */
   scroll-behavior: smooth;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-paper: #F2F2F0;
-  --color-charcoal: #111111;
-  --color-digital: #4D4DFF;
-  --color-code: #1A1A1A;
-
-  --font-display: var(--font-syne);
-  --font-mono: var(--font-space);
-
-  --ease-editorial: cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-/* ... (kode lama perspective tetap sama) ... */
+/* --- 3D UTILITIES --- */
 .perspective-1000 {
   perspective: 1000px;
 }
@@ -41,6 +27,7 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
+/* Hide Scrollbar */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
@@ -50,16 +37,16 @@ body {
   scrollbar-width: none;
 }
 
-/* BARU: Dot Pattern untuk Tech Card */
+/* --- CUSTOM TEXTURES & EFFECTS --- */
+
+/* 1. Dot Pattern untuk Tech Card */
 .bg-grid-pattern {
   background-image: radial-gradient(#111 1px, transparent 1px);
   background-size: 20px 20px;
   opacity: 0.05;
 }
 
-/* ... kode sebelumnya ... */
-
-/* BARU: Digital Scanline Texture */
+/* 2. Digital Scanline untuk Foto (Efek Layar) */
 .bg-scanline::before {
   content: "";
   position: absolute;
@@ -70,26 +57,21 @@ body {
       transparent 50%,
       rgba(0, 0, 0, 0.3) 51%);
   background-size: 100% 4px;
-  /* Ukuran garis scan */
   pointer-events: none;
-  /* Agar tidak mengganggu klik */
   z-index: 10;
-  /* Di atas gambar tapi di bawah caption */
   opacity: 0.3;
-  /* Sangat halus */
   mix-blend-mode: overlay;
 }
 
-/* BARU: Premium Transition Utility */
-/* Ini membuat transisi warna 'snappy' (cepat) tapi scalingnya halus */
+/* 3. Bloom Transition (Animasi Lambat-Cepat) */
 .transition-bloom {
   transition-property: all;
   transition-duration: 1000ms;
-  /* Easing 'khas' Apple/Editorial yang terasa premium */
+  /* Cubic Bezier: Lambat di awal, 'snappy' di akhir */
   transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Saat di-hover, kita percepat transisi warnanya agar terasa responsif */
-.group:hover .transition-bloom {
+.group:hover .transition-bloom,
+.group:active .transition-bloom {
   transition-duration: 600ms;
 }
